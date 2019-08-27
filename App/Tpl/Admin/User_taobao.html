@@ -1,0 +1,199 @@
+
+<div id="list">
+        
+       <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="left" colspan="2" >账户信息	</th>
+            </tr>
+           
+                <tr>
+                    <td>实名信息</td>
+                    <td>{$show.bindAccountInfo.identity}</td>
+                </tr>
+                <tr>
+                    <td>账户类型</td>
+                    <td>{$show.bindAccountInfo.accountType}</td>
+                </tr>
+                <tr>
+                    <td>支付宝账户</td>
+                    <td>{$show.bindAccountInfo.alipatAccount}</td>
+                </tr>
+                <tr>
+                    <td>绑定邮箱</td>
+                    <td>{$show.bindAccountInfo.bindEmail}</td>
+                </tr>
+                <tr>
+                    <td>绑定手机</td>
+                    <td>{$show.bindAccountInfo.bindMobile}</td>
+                </tr>
+          
+            </table>
+            
+            
+              <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="left" colspan="2" >账户安全</th>
+            </tr>
+           
+                <tr>
+                    <td>用户名</td>
+                    <td>{$show.accountSafeInfo.username}</td>
+                </tr>
+               
+                <tr>
+                    <td>密保问题</td>
+                    <td>{$show.accountSafeInfo.pwdProtectedQuestion}</td>
+                </tr>
+                <tr>
+                    <td>手绑定手机号</td>
+                    <td>{$show.accountSafeInfo.bindMobile}</td>
+                </tr>
+                <tr>
+                    <td>密码认证</td>
+                    <td>{$show.accountSafeInfo.loginPasswdVerify}</td>
+                </tr>
+                <tr>
+                    <td>实名认证</td>
+                    <td>{$show.accountSafeInfo.identityVerified}</td>
+                </tr>
+                <tr>
+                    <td>绑定邮箱</td>
+                    <td>{$show.accountSafeInfo.loginEmail}</td>
+                </tr>
+                <tr>
+                    <td>安全级别</td>
+                    <td>{$show.accountSafeInfo.safeLevel}</td>
+                </tr>
+                <tr>
+                    <td>手机绑定</td>
+                    <td>{$show.accountSafeInfo.mobileVerified}</td>
+                </tr>
+                <volist name="show.addrs" id="vo">
+                            <tr>
+                       <td>收货地址</td>
+                    <td>{$vo}</td>
+                     </tr>
+                    </volist>
+                 
+            </table>
+            
+            
+               
+              <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="left" colspan="2" >个人信息	</th>
+            </tr>
+           
+                <tr>
+                    <td>支付宝余额</td>
+                    <td>{$show.personalInfo.aliPayRemainingAmount}</td>
+                </tr>
+                <tr>
+                    <td>余额宝收益</td>
+                    <td>{$show.personalInfo.aliPaymFundProfit}</td>
+                </tr>
+                <tr>
+                    <td>信用等级</td>
+                    <td>{$show.personalInfo.creditLevel}</td>
+                </tr>
+                <tr>
+                    <td>天猫等级</td>
+                    <td>{$show.personalInfo.tianMaoLevel}</td>
+                </tr>
+                <tr>
+                    <td>买家信用分</td>
+                    <td>{$show.personalInfo.buyerCreditPoint}</td>
+                </tr>
+                <tr>
+                    <td>余额宝金额</td>
+                    <td>{$show.personalInfo.aliPaymFund}</td>
+                </tr>
+                <tr>
+                    <td>淘宝等级</td>
+                    <td>{$show.personalInfo.taobaoLevel}</td>
+                </tr>
+                <tr>
+                    <td>淘宝账户名称</td>
+                    <td>{$show.personalInfo.tianMaoAccountName}</td>
+                </tr>
+             
+                  <tr>
+                    <td>淘宝快捷支付限额</td>
+                    <td>{$show.personalInfo.taobaoFastRefundMoney}</td>
+                </tr>
+                 <tr>
+                    <td>天猫分数</td>
+                    <td>{$show.personalInfo.tianMaoPoints}</td>
+                </tr>
+                 <tr>
+                    <td>花呗总额</td>
+                    <td>{$show.personalInfo.huabeiTotalAmount}</td>
+                </tr>
+                 <tr>
+                    <td>花呗余额</td>
+                    <td>{$show.personalInfo.huabeiCanUseMoney}</td>
+                </tr>
+                 <tr>
+                    <td>成长值</td>
+                    <td>{$show.personalInfo.growthValue}</td>
+                </tr>
+                <tr>
+                    <td>天猫经验值</td>
+                    <td>{$show.personalInfo.tianmaoExperience}</td>
+                </tr>
+                <tr>
+                    <td>个人权限</td>
+                    <td>{$show.personalInfo.tmProvilege}</td>
+                </tr>
+            </table>
+            
+        
+             
+              <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="left" colspan="2" >订单列表</th>
+            </tr>
+            <volist name="show.orderList" id="vo">
+                <tr>
+                    <td>订单号</td>
+                    <td>{$vo.orderid}</td>
+                </tr>
+                <tr>
+                    <td>收货地址</td>
+                    <td>{$vo.addr}</td>
+                </tr>
+                   <volist name="vo['orderProducts']" id="sub">
+                <tr>
+                    <td>商品价格</td>
+                    <td>{$sub.productPrice}</td>
+                </tr>
+                <tr>
+                    <td>商品名称</td>
+                   <td>{$sub.productName}</td>
+                </tr>
+                    </volist>
+                <tr>
+                    <td>订单总额</td>
+                     <td>{$vo.orderTotalPrice}</td>
+                </tr>
+                <tr>
+                    <td>订单日期</td>
+                   <td>{$vo.businessDate}</td>
+                </tr>
+                <tr>
+                    <td>订单状态</td>
+                    <td>{$vo.orderStatus}</td>
+                </tr>
+                
+                 <tr style="height:10px; background: #393">
+                    <td>分界线</td>
+                    <td></td>
+                </tr>
+                    </volist>
+                 
+            </table>
+           
+        
+
+
+</div>

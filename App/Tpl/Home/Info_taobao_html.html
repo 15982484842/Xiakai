@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title> <Somnus:sitecfg name="sitetitle"/> </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="description" content=" <Somnus:sitecfg name="sitedescription"/> ">
+<meta name="Keywords" content=" <Somnus:sitecfg name="sitekeywords"/> ">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/feiqi-ee5401a8e6.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/mui.min.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/newpay-bb7fcb5546.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/pay-2b02ca7987.css">
+<style>
+	.container .inpifo {
+	    border-bottom: none;
+	}
+	.btop{
+		border-top: 1px solid #e4e4e4;
+	}
+	.input-group .form-control {		 
+	    line-height: 14px;
+	}
+	input[type=password]::-ms-input-placeholder,input[type=text]::-ms-input-placeholder{
+		padding-top: 4px;
+	}
+	input[type=password]::-webkit-input-placeholder,input[type=text]::-webkit-input-placeholder{
+		padding-top: 4px;
+
+	}
+	.container .input-group input {
+	    float: right;
+	    padding-right: 5px;
+	}
+</style>
+</head>
+<script>
+document.addEventListener('plusready',function(){
+var webview = plus.webview.currentWebview();
+plus.key.addEventListener('backbutton', function() {
+webview.canBack(function(e) {
+        if (e.canBack) {
+                webview.back();
+        } else {
+            webview.close();//hide,quit
+        }
+    })
+});
+
+});
+</script>
+<body class="bg">
+   <!-- header -->
+  <div style="height:10px;width:100%">
+  <a class="back" href="{:U('Info/index')}"></a>
+  </div>
+	<header class="header">
+	 
+		淘宝认证
+	</header>
+	<!-- header end-->
+	<iframe frameborder=1 width=100% height=500 marginheight=0 marginwidth=0 scrolling=no src={$url.url}></iframe>
+ 
+<div style="display: none;">
+	<Somnus:sitecfg name="sitecode"/>
+</div>
+</body>
+</html>

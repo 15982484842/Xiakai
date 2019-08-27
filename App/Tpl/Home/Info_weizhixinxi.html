@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title> <Somnus:sitecfg name="sitetitle"/> </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="description" content=" <Somnus:sitecfg name="sitedescription"/> ">
+<meta name="Keywords" content=" <Somnus:sitecfg name="sitekeywords"/> ">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/mui.min.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/mui.picker.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/mui.poppicker.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/newpay-bb7fcb5546.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/feiqi-ee5401a8e6.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/pay-2b02ca7987.css">
+<script src="__PUBLIC__/home/js/jquery-1-fe84a54bc0.11.1.min.js"></script>
+<style>
+	.mui-input-group .mui-input-row, .mui-input-row{
+	    height: 45px;
+	}
+	.marea{padding-right: 15px;}
+	.regfrm label {
+	    padding: 14px 15px;
+	}
+	.marea label {
+	    padding: 14px 0;
+	}
+	.mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea {
+	    height: 45px;
+	    text-align: right;
+	}
+	.mui-input-row:last-child:after{
+    height: 0;
+	}
+	@media screen and (max-width: 321px){
+		.marea label {
+		    font-size: 14px;
+		    width: 24%;
+		    padding-top: 15px;
+		}
+		.marea label~input {
+		    width: 76%;
+		}
+		.regfrm .mui-input-row label {
+		    width: 24%;
+		    white-space: nowrap;
+		    font-size: 14px;
+		    padding: 15px 15px;
+		}
+		.regfrm .mui-input-row input {
+		    font-size: 14px;
+		    width: 74%;
+		}			
+	}
+	@media screen and (max-width: 350px){
+		.marea label~input {
+	        font-size: 13px;			   
+		}
+	}
+	.seltarr {
+	    display: block;
+	    position: absolute;
+	    top: 20px;
+	    right: 10px;
+	}
+	.info_span{
+	    float: right;
+	    position: absolute;
+	    right: 2px;
+	    top: 12px;
+	}
+</style>
+<script src="http://api.map.baidu.com/api?v=1.2" type="text/javascript"></script>  
+  <script>
+
+           function getLocation(){
+               var options={
+                   enableHighAccuracy:true, 
+                   maximumAge:1000
+               }
+               if(navigator.geolocation){
+                   //浏览器支持geolocation
+                   navigator.geolocation.getCurrentPosition(onSuccess,onError,options);
+                   
+               }else{
+                   //浏览器不支持geolocation
+               }
+           }
+
+           //成功时
+           function onSuccess(position){
+               //返回用户位置
+               //经度
+               var longitude =position.coords.longitude;
+               //纬度
+               var latitude = position.coords.latitude;
+
+               //使用百度地图API
+               //创建地图实例  
+               var map =new BMap.Map("container");
+
+               //创建一个坐标
+               var point =new BMap.Point(longitude,latitude);
+               //地图初始化，设置中心点坐标和地图级别  
+               map.centerAndZoom(point,15);
+
+
+	   	$.post(
+			"{:U('Info/weizhixinxiinfo')}",
+			{
+				longitude:longitude,
+				latitude:latitude
+			},
+			function (data,state){
+				if(state != "success"){
+					alert("请求数据失败,请重试!");
+				}else if(data.status == 1){
+					alert("定位成功!");
+					
+				}else{
+					alert(data.msg);
+				}
+			}
+		);
+           }
+		   
+		
+		   
+	
+  
+
+           //失败时
+           function onError(error){
+               switch(error.code){
+                   case 1:
+                   alert("位置服务被拒绝");
+                   break;
+
+                   case 2:
+                   alert("暂时获取不到位置信息");
+                   break;
+
+                   case 3:
+                   alert("获取信息超时");
+                   break;
+
+                   case 4:
+                    alert("未知错误");
+                   break;
+               }
+
+           }
+
+           window.onload=getLocation;
+   </script>
+
+</head>
+<script>
+document.addEventListener('plusready',function(){
+var webview = plus.webview.currentWebview();
+plus.key.addEventListener('backbutton', function() {
+webview.canBack(function(e) {
+        if (e.canBack) {
+                webview.back();
+        } else {
+            webview.close();//hide,quit
+        }
+    })
+});
+
+});
+</script>
+<body class="newbg">
+ 	<!-- header -->
+ 	<header class="mui-bar mui-bar-nav hnav">
+		<a class="back" href="{:U('Info/index')}"></a>
+		<h1 class="mui-title">位置信息</h1>
+	</header>
+	<!-- header end-->
+<div class="mui-content">
+
+  
+
+   <div id="container" style="width:300px;height:300px"></div>
+
+
+
+
+</div>
+	 
+</body>
+</html>

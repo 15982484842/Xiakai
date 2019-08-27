@@ -1,0 +1,98 @@
+<h3>
+    {$title}
+</h3>
+<div class="filter">
+    <form action="{:U(GROUP_NAME.'/Bills/index')}" method="post">
+        <input name="keyword" type="text" class="inpMain" placeholder="用户名"  value="{$keyword}" size="20" />
+           <input name="sday" id="sday" type="text" placeholder="开始时间" class="inpMain  day1" value="{$sday}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" size="16" />
+
+        <input name="eday" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="eday" type="text" placeholder="结束时间" class="inpMain  day1" value="{$eday}" size="16" />
+        <input name="submit" class="btnGray" type="submit" value="筛选" />
+    </form>
+    <div style="font-size:18px;color:#000;border:1px dashed #d9d9d9; background-color:#fff">订单总计：{$sumcont}笔&nbsp;/&nbsp;金额总计：{$sumamount}元</div>
+</div>
+<div id="list">
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="50" align="center">ID</th>
+                <th width="100" align="center">用户名</th>
+                <th width="50">提现金额</th>
+                <th width="150" align="center">申请提现日期</th>
+                <th align="50">状态</th>
+                <th align="center">操作</th>
+            </tr>
+            <volist name="list" id="vo">
+                <tr>
+                    <td align="center">{$vo.id}</td>
+                    <td align="center">{$vo.user}</td>
+					<td align="center">{$vo.money}</td>
+                          <td align="center">{$vo.time|date='Y-m-d  H:i:s',###}</td>
+                    	<td align="center" <eq name="mod" value="1"> style="background-color:#e4e4e4"</eq>>	<php>
+							if($vo['zhuangtai'] == 0)echo "<font style='color:#F00;font-size:12px'>未确认</font>";
+							if($vo['zhuangtai'] == 1)echo "<font style='color:#0fa100;font-size:12px; font-weight:bold'>已确认</font>";
+                            if($vo['zhuangtai'] == 2)echo "<font style='color:#C00;font-size:12px; font-weight:bold'>已拒绝</font>";
+
+						</php></td>
+              <style>
+			  .shanchu{text-align:center; width:70px; float:left; height:30px; line-height:30px; background:#b1401e; margin-left:10px;}
+			  .shanchu a{color:#FFF;  font-weight:bold}
+			  
+			    .quren{text-align:center; width:70px; float:left; height:30px; line-height:30px; background:#0072C6; margin-left:10px;}
+			  .quren a{color:#FFF; font-weight:bold}
+			     .bohui{text-align:center; width:70px; float:left; height:30px; line-height:30px; background:#FC0; margin-left:10px;}
+			  .bohui a{color:#FFF; font-weight:bold}
+			    .duanxin{text-align:center; width:90px; float:left; height:30px; line-height:30px; background:#090; margin-left:10px;}
+			  .duanxin a{color:#FFF; font-weight:bold}
+			  </style>
+                    <td align="center">
+                       <div class="shanchu"> <a  href="javascript:del('{$vo.ordernum}','{:U(GROUP_NAME.'/Tixian/del',array('id'=>$vo['id']))}');">删除订单</a> </div>
+                       <div class="quren"> 
+                        <a   href="javascript:queren('{$vo.ordernum}','{:U(GROUP_NAME.'/Tixian/queren',array('id'=>$vo['id']))}');">确认提现</a> </div>
+                        <div class="bohui"> 
+                                       <a  href="javascript:bohui('{$vo.ordernum}','{:U(GROUP_NAME.'/Tixian/bohui',array('id'=>$vo['id']))}');">驳回提现</a></div>
+                                       <!--
+                        <div class="duanxin"> 						
+                         <a  href="{:U(GROUP_NAME.'/Tixian/duanxinqueren',array('id'=>$vo['id']))}">发送确认短信</a>
+                        </div>               
+ <div class="duanxin"> 
+                         <a  href="{:U(GROUP_NAME.'/Tixian/duanxinbohui',array('id'=>$vo['id']))}">发送驳回短信</a>
+                        </div> -->
+                    </td>
+                </tr>
+            </volist>
+        </table>
+</div>
+<div class="clear"></div>
+<div class="pager">
+    {$page}
+</div>
+</div>
+<script>
+    function del(num,jumpurl){
+        layer.confirm(
+                '确定要删除还款订单吗?',
+                function (){
+                    window.location.href = jumpurl;
+                }
+        );
+    }
+	
+	
+    function queren(num,jumpurl){
+        layer.confirm(
+                '确认提现订单吗?',
+                function (){
+                    window.location.href = jumpurl;
+                }
+        );
+    }
+	
+	   function bohui(num,jumpurl){
+        layer.confirm(
+                '驳回提现订单吗?',
+                function (){
+                    window.location.href = jumpurl;
+                }
+        );
+    }
+</script>

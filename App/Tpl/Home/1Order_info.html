@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title> <Somnus:sitecfg name="sitetitle"/> </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="description" content=" <Somnus:sitecfg name="sitedescription"/> ">
+<meta name="Keywords" content=" <Somnus:sitecfg name="sitekeywords"/> ">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/mui.min.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/feiqi-ee5401a8e6.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/newpay-bb7fcb5546.css">
+</head>
+<body>
+    <!-- header -->
+    <header class="mui-bar mui-bar-nav hnav">
+		<a href="{:U('Order/lists')}" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">借款详情</h1>
+	</header>
+	<!-- header end-->
+<div class="mui-content">
+	<article class="jiekuan">
+		<div class="oktit">
+			借款进度
+		</div>
+				<div class="cf okdan">
+			<div class="kprogress">
+				<span class="f14 red">
+					<php>
+						if($data['status'] == 2){
+							echo "交易成功";
+						}elseif($data['status'] == -1){
+							echo "交易失败";
+						}
+					</php>
+				</span>
+				<span class="fr fc9 f26"><span class="f18">¥</span>{$data.money}</span>
+			</div>
+			<div class="prgbar">
+					<div class="prg1">
+						<div>
+							<php>
+								if($data['status'] == 0)
+									echo '<span class="procir3"></span>';
+								else
+									echo '<span class="procir3"></span>';
+							</php>
+						</div>
+						<div class="mt4">
+							<p>
+								<php>
+									if($data['status'] == 0)
+										echo "订单正在审核";
+									else
+										echo "已完成";
+								</php>
+							</p>
+							<p class="f12"></p>
+						</div>
+					</div>
+					<div class="prg2">
+						<div>
+							<php>
+								if($data['status'] == 1){
+									echo '<span class="procir2"></span>';
+								}elseif($data['status'] == -1){
+									echo '<span class="procir4"></span>';
+								}elseif($data['status'] == 2){
+									echo '<span class="procir3"></span>';
+								}
+								elseif($data['status'] == 3){
+									echo '<span class="procir3"></span>';
+								}else{
+									echo '<span class="procir2"></span>';
+								}
+							</php>
+						</div>
+						<div class="mt4">
+							<p>
+								<php>
+									if($data['status'] == 1){
+										echo "审核通过";
+									}elseif($data['status'] == -1){
+										echo "订单冻结";
+									}elseif($data['status'] == 2){
+										echo "已打款";
+									}
+									elseif($data['status'] == 3){
+										echo "打款中";
+									}
+									elseif($data['status'] == 4){
+										echo "评分不足需缴纳首期还款费用";
+									}
+									elseif($data['status'] == 5){
+										echo "保险费5%";
+									}else{
+										echo "审核状态";
+									}
+								</php>
+							</p>
+							<p class="f12"></p>
+						</div>
+					</div>
+					<div class="prg3">
+						<div>
+							<php>
+								if($data['status'] == 2){
+									echo '<span class="procir3"></span>';
+								}else{
+									echo '<span class="procir1"></span>';
+								}
+							</php>
+						</div>
+						<div class="mt4">
+							<p>
+								到账成功
+							</p>
+							<p class="f12"></p>
+						</div>
+					</div>
+			</div>
+		</div>
+			</article>
+	<article class="mt10 jiekuan">
+		<div class="oktit">
+			借款详情
+		</div>
+		<div class="cf okdan">
+			<div class="oktable">
+				<span class="fc9 listit">订单编号</span>
+				<span>{$data.ordernum}</span>
+			</div>
+			<div class="oktable">
+				<span class="fc9 listit">借款金额</span>
+				<span>￥{$data.money}</span>
+			</div>
+			<div class="oktable">
+				<span class="fc9 listit">借款期限</span>
+				<span>{$data.months}个月</span>
+			</div>
+			<div class="oktable">
+				<span class="fc9 listit">到账银行</span>
+				<span>{$data.bank}</span>
+			</div>
+			<div class="oktable">
+				<span class="fc9 listit">收款账号</span>
+				<span>{$data.banknum}</span>
+			</div>
+			<!--
+			<div class="oktable">
+				<span class="fc9 listit">每月还款</span>
+				<span>¥{$data.monthmoney}</span>
+			</div>
+			-->
+			<div class="oktable">
+				<span class="fc9 fl listit">还款说明</span>
+				<span class="fl deinfo">您需在{:C('cfg_huankuanri')}进行还款；</span>
+			</div>
+			
+			<div class="oktable">
+				<span class="fc9 fl listit">提现密码</span>
+				<!--
+				<span class="fl deinfo">{$data.tixian}</span>
+				-->
+			</div>
+			
+			
+		</div>
+	</article>
+	
+	<div class="mui-content">
+		<form id="back-form" onSubmit="return false">
+			<div class="mui-input-group regfrm">
+				<div class="mui-input-row pr">
+					<label>提现密码</label>
+					<input id="txpassword" name="txpassword" type="password" class="mui-input-clear mui-input" placeholder="请输入提现密码" data-input-clear="3">
+					<span class="mui-icon mui-icon-clear mui-hidden"></span>
+					<i class="seltarr password_icon_off pab" id='switch'></i>
+				</div>
+			</div>
+			<article class="msub"><input class="submit" onClick="tixian()" type="submit" value="确认提现" ></article>
+	<!-- 提示 -->
+			<div style="display: none;top: 45%;" class="errdeo" id="messageBox"></div>
+		</form>
+	</div>
+	<div class="deowin2" style="display:none;" id="deowin31">
+		<div class="deocon2">
+			<div class="divpad2" style="text-align:center;height:110px;background-color: #F0F0F0">
+				<p class='tex' style="color: #4c4c4c;line-height: 30px;font-size:16px;"></p>
+			</div>
+			<div class="wobtn"><!-- 一个按钮用这个结构 -->
+				<a id="winbtn3" href="javascript:;">确定</a>
+			</div>
+		</div>
+	</div>
+	<div class="emask" id="mask3" style="display: none;"></div>
+</div>
+<div style="display: none;">
+	</div>
+</body>
+<script src="/Public/home/js/jquery-1-fe84a54bc0.11.1.min.js"></script>
+<script type="text/javascript">
+	function tixian()
+	{
+		var tixian = $('#txpassword').val();
+		if(tixian == "")
+		{
+			alert("请输入提现密码！");
+			//return false;
+			
+		}
+			
+		
+			
+			else if(tixian == "{$data.tixian}")
+			{
+		
+					
+				
+				
+					//alert("提现申请成功，提现资金将于24小时内转到您绑定的银行卡！");
+					
+					alert("审核已通过，请联系客服打款！");
+					
+				
+				
+				
+					//window.location.href = "/index.php?m=Order&a=lists";
+					
+					window.location.href = "/";
+					
+				//	window.location.href = "/index.php?m=Order&a=vip";
+		    }
+		
+		
+		else{
+					alert("密码错误！");
+					//window.location.href = "/index.php?m=Order&a=lists";
+					
+				
+			
+				}
+		
+		
+	}
+
+</script>
+
+	
+	
+	
+	
+	
+	
+</div>
+<div style="display: none;">
+	<Somnus:sitecfg name="sitecode"/>
+</div>
+</body>
+</html>

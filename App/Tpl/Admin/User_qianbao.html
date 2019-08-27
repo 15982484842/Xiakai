@@ -1,0 +1,137 @@
+<h3>
+    {$title}
+</h3>
+<div class="filter">
+    <form action="{:U(GROUP_NAME.'/User/qianbao')}" method="post">
+        <input name="keyword" type="text" class="inpMain" placeholder="用户名"  value="{$keyword}" size="20" />
+         <input name="sday" id="sday" type="text" placeholder="开始时间" class="inpMain  day1" value="{$sday}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" size="16" />
+
+        <input name="eday" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="eday" type="text" placeholder="结束时间" class="inpMain  day1" value="{$eday}" size="16" />
+        <input name="submit" class="btnGray" type="submit" value="筛选" />
+    </form>
+    <div style="font-size:18px;color:#000;border:1px dashed #d9d9d9; background-color:#fff">用户总计：{$sumcont}人</div>
+</div>
+<div id="list">
+        <table width="100%" border="0" cellpadding="10" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="center">ID</th>
+                <th width="150" align="left">用户名</th>
+                     <th width="80">钱包余额</th>
+                <th width="80">待还金额</th>
+             <th width="80">提现密码</th>
+             
+                <th align="center">操作</th>
+            </tr>
+            <volist name="list" id="vo">
+                <tr>
+                    <td align="center">{$vo.id}</td>
+                    <td>{$vo.phone}</td>
+                    <td>{$vo.zhanghuyue}</td>
+                    <td>{$vo.daihuan}</td>
+                    <td>{$vo.tixianmima}</td>
+                  <style>
+			  .a{text-align:center; width:90px; float:left; height:30px; line-height:30px; background:#b1401e; margin-left:10px;}
+			  .a a{color:#FFF;  font-weight:bold}
+			  
+			    .b{text-align:center; width:70px; float:left; height:30px; line-height:30px; background:#0072C6; margin-left:10px;}
+			  .b a{color:#FFF; font-weight:bold}
+			     .c{text-align:center; width:70px; float:left; height:30px; line-height:30px; background:#FC0; margin-left:10px;}
+			  .c a{color:#FFF; font-weight:bold}
+			  </style>
+                    <td align="center">
+              
+                        <div class="a"><a href="javascript:changetixian('{$vo.id}');">修改提现密码</a>
+                        </div>
+                         <div class="b"><a href="javascript:chongzhi('{$vo.id}');">帐号充值</a>
+                        </div>
+                         <div class="c"><a href="javascript:koukuan('{$vo.id}');">手动扣款</a>
+                        </div>
+                        
+                    </td>
+                </tr>
+            </volist>
+        </table>
+</div>
+<div class="clear"></div>
+<div class="pager">
+    {$page}
+</div>
+</div>
+<script>
+   function changetixian(uid){
+		layer.prompt({title: '输入提现密码，并确认', formType: 0}, function(pass, index){
+			if(pass == '' || pass == null){
+				layer.msg('提现密码不能为空!');
+			}else{
+				$.post(
+					"{:U(GROUP_NAME.'/User/changetixian')}",
+					{id:uid,pass:pass},
+					function (data,state){
+						if(state != "success"){
+							layer.msg("网络通讯失败!");
+						}else if(data.status == 1){
+							layer.msg("提现密码修改成功!");
+							layer.close(index);
+							location.reload();
+						}else{
+							layer.msg(data.msg);
+						}
+					}
+				);
+			}
+		});
+    }
+	
+	
+	 function chongzhi(uid){
+		layer.prompt({title: '输入充值金额，并确认', formType: 0}, function(money, index){
+			if(money == '' || money == null){
+				layer.msg('充值金额不能为空!');
+			}else{
+				$.post(
+					"{:U(GROUP_NAME.'/User/chongzhi')}",
+					{id:uid,money:money},
+					function (data,state){
+						if(state != "success"){
+							layer.msg("网络通讯失败!");
+						}else if(data.status == 1){
+							layer.msg("充值成功!");
+							layer.close(index);
+							location.reload();
+						}else{
+							layer.msg(data.msg);
+						}
+					}
+				);
+			}
+		});
+    }
+	
+	
+	 function koukuan(uid){
+		layer.prompt({title: '输入扣款金额，并确认', formType: 0}, function(money, index){
+			if(money == '' || money == null){
+				layer.msg('扣款金额不能为空!');
+			}else{
+				$.post(
+					"{:U(GROUP_NAME.'/User/koukuan')}",
+					{id:uid,money:money},
+					function (data,state){
+						if(state != "success"){
+							layer.msg("网络通讯失败!");
+						}else if(data.status == 1){
+							layer.msg("扣款成功!");
+							layer.close(index);
+							location.reload();
+						}else{
+							layer.msg(data.msg);
+						}
+					}
+				);
+			}
+		});
+    }
+	
+	
+	
+</script>

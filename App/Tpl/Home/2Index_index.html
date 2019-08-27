@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title> <Somnus:sitecfg name="sitetitle"/> </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content=" <Somnus:sitecfg name="sitedescription"/> ">
+<meta name="Keywords" content=" <Somnus:sitecfg name="sitekeywords"/> ">
+<!-- 忽略页面中的数字识别为电话号码 -->
+<meta name="format-detection" content="telephone=no,email=no"/>
+<link rel="shortcut icon" href="__PUBLIC__/home/images/logo.ico">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/mui.min.css"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/feiqi-ee5401a8e6.css"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/newpay-bb7fcb5546.css"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/newindex-09d04b32f3.css"/>
+<script src="__PUBLIC__/home/js/jquery.js"></script>
+<script src="__PUBLIC__/home/js/jquery.slider-min.js"></script>
+<script src="__PUBLIC__/home/js/jquery.dependClass.js"></script>
+<style>
+.gundong{
+	line-height: 26px;
+    font-size: 18px;
+    background-color: #f5f5f9;
+}
+.gundong_phone{
+	color: #198eed;
+}
+.gundong_money{
+	color:red;
+}
+</style>
+</head>
+<script>
+document.addEventListener('plusready',function(){
+var webview = plus.webview.currentWebview();
+plus.key.addEventListener('backbutton', function() {
+webview.canBack(function(e) {
+        if (e.canBack) {
+                webview.back();
+        } else {
+            webview.close();//hide,quit
+        }
+    })
+});
+
+});
+</script>
+<body class="whitebg newindex">
+<!--头部-->
+
+</head>
+<body>
+
+<style type="text/css">
+.yqhyou .btn{
+    padding:.8em 4em .2em 4em;
+	font-family: 'Microsoft Yahei', 'Open Sans', sans-serif;
+}
+.yqhyou .btn2 {
+    font-size: 1em;
+    padding: 0 4em .8em 4em;
+    margin: 0 auto;
+    display: inline-block;
+    text-align: center;
+    color: #ffffff;
+    overflow: hidden;
+	font-family: 'Microsoft Yahei', 'Open Sans', sans-serif;
+}
+.yqhyou .btn3 {
+    font-size: 1em;
+    margin: 0 auto;
+    display: inline-block;
+    text-align: center;
+    color: #ffffff;
+    overflow: hidden;
+    width: 50%;
+    float: left;
+    margin-top: 10px;
+	font-family: 'Microsoft Yahei', 'Open Sans', sans-serif;
+}
+.btn4{
+    border-right: 1px solid #fff;
+	font-family: 'Microsoft Yahei', 'Open Sans', sans-serif;
+}
+#huankuan{
+    color: #fff;
+}
+.yqhyou .btn{
+    padding:0;
+    padding-top: 10px;
+	font-family: 'Microsoft Yahei', 'Open Sans', sans-serif;
+}
+.yqhyou{
+    background:url(__PUBLIC__/home/imgs/dlbg.png);
+	height:197px;
+    background-repeat:repeat-x;
+    background-position:center 0;
+	font-family: 'Microsoft Yahei', 'Open Sans', sans-serif;
+}
+</style>
+  <div class="yqhyou" style="text-align: center; padding-top:50px; color:#FFF"> 
+   <a href="javascript:void(0)" class="btn" style="margin-top: 10px;font-size:30px;"><span style="font-size:12px; color:#FFF">申请金额&nbsp;&nbsp;</span><span id="money_str" style="color:#FFF">0</span><span style="font-size:12px;color:#FFF">元</span></a>
+   <div class="cl"></div>
+   <!--
+    <a href="javascript:void(0)" class="btn3 btn4">时间<span id="month" style=" font-size:18px;">0</span>天</a>
+   <a href="javascript:void(0)" class="btn3" id>还款本金<span id="benjin" style="font-size:18px;">0</span>元<br/></a>
+   <a href="javascript:void(0)" class="btn3 btn4" >利息<span id="fuwufei" style="font-size:18px;">0</span>元</a>
+   <a href="javascript:void(0)" class="btn3" >共计还款<span id="total" style="font-size:18px;">0</span>元</a>
+-->
+
+   
+   <div class="cl"></div>
+   <div style="height:20px;"></div>
+  </div> 
+
+ <!-- <section class="other">
+            <a id="dnapp">
+            	<img src="__PUBLIC__/home/imgs/bba.jpg" width="100%" alt="">
+            </a>
+        </section>-->
+
+
+<!--表单-->
+<form id="submitform">
+<div style="height:70px;"></div>
+    <section class="new-form" >
+        <!--滑块部分-->
+        <div class="sliderwarp">
+            <div class="minmoney commoney">{:C('cfg_minmoney')}元</div>
+            <div class="maxmoney commoney">
+           
+            <if condition="$Userinfo.edu eq '0'">{:C('cfg_maxmoney')}
+<else /> {$Userinfo.edu}
+</if>
+            元</div>
+            <div id="subtract" class="subtract new-btn"></div>
+            <div id="tap1" class="layout-slider">
+				<input id="SliderSingle11" type="slider" name="money" value="0;{:C('cfg_definamoney')};" style="display: none">
+            </div>
+            <div id="plus" class="plus new-btn"></div>
+        </div>
+        <!--借款期限-->
+        <section class="time">
+            <p style="font-size:16px; color:#333; text-align:center;  margin-bottom:10px;">借款期限</p>
+            <div class="timelimit">
+			
+		
+
+            </div>
+        </section>
+		
+			     <section class="huankuan mui-clearfix">
+            <h3>每期还款</h3>
+            <div class="huankuan-right">
+               <i id="yuegong">0.00</i>元
+                <span>&nbsp;&nbsp;(日利率<span id="rixi">0.00</span>% 月利息￥<i id="fuwufei">0.00</i>元)</span>
+            </div>
+        </section>
+       
+        
+          
+        <!--条款-->
+ 
+        <!--申请接借贷-->
+        <div class="protit sevagreee ">
+            <a class="logBtn" href="javascript:subForm();">立即申请</a>
+        </div>
+        <!--other-->
+		
+      	<div class="gundong">
+			<marquee scrollamount="2" scrolldelay="50" direction="up" style="    text-align: center;    font-size: 16px;width: 100%;height: 24px;">
+			<foreach name="redaydata" item="vo">
+			 	<span><php>echo date("Y-m-d");</php></span> : <span class="gundong_phone">{$vo.phone}</span> 成功借款 <span class="gundong_money"><php>echo rand(1,200);</php></span>000元! <br>
+			</foreach>
+			</marquee>
+		</div>
+       
+    </section>
+     
+         <div>
+            	<img src="__PUBLIC__/home/imgs/bb.jpg" width="100%" alt="">
+            </div>
+   <div style=" height:60px;">
+   </div>
+    <!-- 底部固定栏 -->
+    <!-- bottom bar -->
+    <nav class="mui-bar mui-bar-tab bottom-bar" >
+        <a class="mui-tab-item cur" href="{:U('Index/index')}">
+                <span class="mui-icon mui-icon-home home cur">
+        </span>
+            <span class="mui-tab-label">申请借款</span>
+         </a>
+           <a class="mui-tab-item" href="/index.php?m=Qianbao&a=index">
+            <span class="mui-icon"><img src="/Public/home/imgs/ico_foot2.png" width="100%" alt=""></span>
+            <span class="mui-tab-label">钱包</span>
+        </a>
+  
+  	
+        <a class="mui-tab-item" href="{:U('Help/index')}">
+            <span class="mui-icon mui-icon-contact muihelp"></span>
+            <span class="mui-tab-label">助手</span>
+        </a>        
+  
+        <a class="mui-tab-item" href="{:U('User/index')}">
+            <span class="mui-icon mui-icon-email myself"></span>
+            <span class="mui-tab-label">用户中心</span>
+        </a>
+    </nav>
+</form>
+
+
+
+
+<!-- 加减提示 -->
+<div class="plusmore">不能大于最大金额</div>
+<div class="subtractmore">不能小于最小金额</div>
+<div class="deowin" style="display: none;padding:0 6%;" id="deowin4">
+    <div class="deocon">
+    <h3 style="text-align: center;font-size: 16px; color:#198eed;height: 40px;line-height: 40px;border-bottom: 1px solid #198eed;">《平台服务协议》</h3>
+        <div class="divpad" style="height: 340px;overflow-y: auto;">
+            <iframe src="" style="width:100%;height:100%;border:none;"></iframe>
+        </div>
+        <div class="wobtn">
+            <!-- 一个按钮用这个结构 -->
+                <a style="color:#198eed;" id="winbtn4" href="javascript:;">关闭</a>
+        </div>
+    </div>
+</div>
+<div class="deowin" style="display: none;padding:0 6%;" id="deowin33">
+    <div class="deocon">
+    <h3 style="text-align: center;font-size: 16px; color:#198eed;height: 40px;line-height: 40px;border-bottom: 1px solid #198eed;">《借款协议》</h3>
+        <div class="divpad" style="height: 340px;overflow-y: auto;">
+            <iframe src="" style="width:100%;height:100%;border:none;"></iframe>
+        </div>
+        <div class="wobtn">
+            <!-- 一个按钮用这个结构 -->
+                <a style="color:#198eed;" id="winbtn33" href="javascript:;">关闭</a>
+        </div>
+    </div>
+</div>
+<div class="deowin" style="display: none;padding:0 6%;" id="deowin5">
+    <div class="deocon">
+    <h3 style="text-align: center;font-size: 16px; color:#198eed;height: 40px;line-height: 40px;border-bottom: 1px solid #198eed;">《委托授权协议》</h3>
+        <div class="divpad" style="height: 340px;overflow-y: auto;">
+            <iframe src="" style="width:100%;height:100%;border:none;"></iframe>
+        </div>
+        <div class="wobtn">
+            <!-- 一个按钮用这个结构 -->
+                <a style="color:#198eed;" id="winbtn5" href="javascript:;">关闭</a>
+        </div>
+    </div>
+</div>
+<div class="emask" id="mask3" style="display: none;"></div>
+<div class="deowin2" style="display:none;" id="deowin31">
+    <div class="deocon2">
+        <div class="divpad2" style="text-align:center;height:110px">
+            <p class='tex' style="color: #4c4c4c;line-height: 30px;font-size:16px;"></p>
+        </div>
+        <div class="wobtn">
+            <!-- 一个按钮用这个结构 -->
+                <a id="winbtn3" href="javascript:;">确定</a>
+        </div>
+    </div>
+</div>
+<div style="display:none;">
+<form action="{:U('Order/daikuan')}" method="post" id="orderform">
+	<input type="hidden" name="money" value="" id="order_money" />
+	<input type="hidden" name="month" value="1" id="order_month" />
+</form>
+</div>
+<script>
+var num = 0;
+var MINMONEY = {:C('cfg_minmoney')};
+
+var user_edu = '{$Userinfo.edu}';
+if(user_edu==0)
+{
+	var MAXMONEY = {:C('cfg_maxmoney')};
+	}
+	else
+	{
+		var MAXMONEY ='{$Userinfo.edu}';
+		}
+var nowmoney = {};
+var feilv_value = "{:C('cfg_fuwufei')}";
+var months=[{:C('cfg_dkmonths')}];
+var definamonth = {:C('cfg_definamonth')};
+var feilv = feilv_value.split(',');
+var STEP = 100;
+var user_id = '{$user}';
+var SliderSingle1 = jQuery("#SliderSingle11");
+var LoginUrl = "{:U('User/login')}";
+var PublicUrl = "{:C('cfg_siteurl')}/Public/";
+function subForm(){
+    if(user_id=='0'){
+        window.location.href = LoginUrl;
+        return false;
+    }
+ 
+    //判断失败订单是否超过预期
+    $.post(
+    	"{:U('Order/checkorder')}",
+    	{},
+    	function(data,state){
+    		if(state != "success"){
+		        $(".tex").html('请求数据失败!');
+		        $("#deowin31").show();
+		        $('#mask3').show();
+    		}else if(data.status == 1){
+    			$("#orderform").submit();
+    		}else{
+		        $(".tex").html(data.msg);
+		        $("#deowin31").show();
+		        $('#mask3').show();
+    		}
+    	}
+    );
+}
+$(function(){
+	for(var i=0;i<months.length;i++){
+		var tmp;
+		tmp = months[i];
+		var html = '<button id="'+i+'m" class="timeBtn "><span id="timeSpanVal_'+i+'">'+tmp+'</span>个月</button>';
+		$(".timelimit").append(html);
+	}
+	    $("#qbtn5").click(function() {
+	        var url="<Somnus:block name="协议1地址" />";
+	        $('#deowin5 iframe').attr('src',url); 
+	         setTimeout(function (){
+	            $('#deowin5').show();
+	            $('#mask3').show();  
+	        },500);
+	    });
+	    $("#qbtn4").click(function() {
+	        var url="<Somnus:block name="协议3地址" />";
+	        $('#deowin4 iframe').attr('src',url); 
+	         setTimeout(function (){
+	            $('#deowin4').show();
+	            $('#mask3').show();  
+	        },500);
+	    });
+	    $("#qbtn33").click(function() {
+	        var url="<Somnus:block name="协议2地址" />";
+	        $('#deowin33 iframe').attr('src',url);           
+	        setTimeout(function (){
+	            $('#deowin33').show();
+	            $('#mask3').show();  
+	        },500);
+	    });
+    	$('#winbtn33').click(function(){
+            $('#deowin33').hide();
+            $('#mask3').hide();
+            $('#deowin33 iframe').attr('src','');      
+
+       });
+});
+</script>
+<script src="__PUBLIC__/home/appjs/Index.js"></script>
+<div style="display: none;">
+	<Somnus:sitecfg name="sitecode"/>
+</div>
+</body>
+</html>

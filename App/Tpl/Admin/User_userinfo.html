@@ -1,0 +1,306 @@
+<h3>
+    <a href="{:U(GROUP_NAME.'/User/index')}" class="actionBtn">返回列表</a>
+ 	基本资料
+</h3>
+    <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+        <tr>
+            <td width="100" align="right">手机号/用户名</td>
+            <td>
+                <span id="userid1">{$baseinfo.user}</span>
+            </td>
+        </tr>
+      <tr>
+            <td width="100" align="right">手机服务密码</td>
+            <td>
+                <span>{$baseinfo.phone}</span>
+            </td>
+        </tr>
+        
+        <tr>
+            <td width="100" align="right">姓名/身份证号</td>
+            <td>
+				<span>{$baseinfo.name}</span>|
+				<input id="sfz1"value="{$baseinfo.usercard}">
+
+            </td>
+        </tr>
+        <tr>
+            <td width="100" align="right">身份证拍照</td>
+            <td>
+            	<span>
+            		身份证正面:<a href="{$baseinfo.cardphoto_1}" target="_blank">点击查看</a>
+            	</span>
+            	<br />
+            	<span>
+            		身份证反面:<a href="{$baseinfo.cardphoto_2}" target="_blank">点击查看</a>
+            	</span>
+            	<br />
+            	<span>
+            		手持身份证:<a href="{$baseinfo.cardphoto_3}" target="_blank">点击查看</a>
+            	</span>
+            </td>
+        </tr>
+        <tr>
+            <td width="100" align="right">现居住地</td>
+            <td>
+                <span>{$baseinfo.addess_ssq} {$baseinfo.addess_more}</span>
+            </td>
+        </tr>
+        <tr>
+            <td width="100" align="right">单位信息</td>
+            <td>
+            	<span>
+            		单位名称: {$baseinfo.dwname}
+            	</span>
+            	<br />
+            	<span>
+            		单位地址: {$baseinfo.dwaddess_ssq} {$baseinfo.dwaddess_more}
+            	</span>
+            	<br />
+            	<span>
+            		职位: {$baseinfo.position}
+            	</span>
+            	<br />
+            	<span>
+            		工龄: {$baseinfo.workyears} 年
+            	</span>
+            	<br />
+            	<span>
+            		单位电话: {$baseinfo.dwphone}
+            	</span>
+            	<br />
+            	<span>
+            		月收入: {$baseinfo.dwysr}
+            	</span>
+            	<br />
+            	<span>
+            		联系人1: <input id="lx11" value="{$baseinfo.persongx_1}"> :  <input id="lx12"value="{$baseinfo.personname_1}"> : <input id="lx13" value="{$baseinfo.personphone_1}">
+            	</span>
+            	<br />
+            	<span>
+            		联系人2:  <input id="lx21"  value="{$baseinfo.persongx_2}"> : <input  id="lx22" value="{$baseinfo.personname_2}"> : <input  id="lx23" value="{$baseinfo.personphone_2}">
+            	</span>
+            	
+            </td>
+        </tr>
+        <tr>
+            <td width="100" align="right">银行卡信息</td>
+            <td>
+            	<span>
+            		银行名称: {$baseinfo.bankname}
+            	</span>
+            	<br />
+            	<span>
+            		银行卡号:  <input id="yhk1"value="{$baseinfo.bankcard}">
+            	</span>
+                <if condition="$baseinfo.text_yinhangka neq '' ">
+
+<br/>
+
+			<span style="color:#F00">
+
+            		以下是查询验证返回的信息:
+
+		</span>
+
+
+<br/>
+
+			<span>
+
+            		是否一致: {$show.msg}
+
+		</span>
+
+
+<br/>
+
+			<span>
+
+            		性别: {$show.idcard_data.sex}
+
+		</span>
+
+<br/>
+
+			<span>
+
+            		出生日期: {$show.idcard_data.birthday}
+
+		</span>
+        <br/>
+
+			<span>
+
+            		身份证号码: {$show.idcard_data.idcardno}
+
+		</span>
+          <br/>
+
+			<span>
+
+            		姓名: {$show.idcard_data.name}
+
+		</span>
+  <br/>
+
+			<span>
+
+            		身份证地址: {$show.idcard_data.address}
+
+		</span>
+         <br/>
+
+			<span>
+
+            		银行官网: {$show.data.bankurl}
+
+		</span>
+         <br/>
+
+			<span>
+
+            		开户地: {$show.data.areainfo}
+
+		</span>
+  <br/>
+
+			<span>
+
+            		银行服务密码: {$show.data.servicephone}
+
+		</span>
+          <br/>
+
+			<span>
+
+            		银行名字: {$show.data.bankname}
+
+		</span>
+          <br/>
+
+			<span>
+
+            		卡种: {$show.data.cardtype}
+
+		</span>
+          <br/>
+
+			<span>
+
+            		卡片类型: {$show.data.cardname}
+
+		</span>
+          <br/>
+
+			<span>
+
+            		银行卡号码: {$show.data.bankcardno}
+
+		</span>
+         <br/>
+
+			<span>
+
+            		银行卡bin号: {$show.data.cardprefixnum}
+
+		</span>
+
+<else/>
+<!--
+<br/>
+			该用户还未验证银行卡信息！<br/>
+<a style="color:#F00" href="{:U(GROUP_NAME.'/User/yinhangka')}&id={$baseinfo.user}">点击验证</a>
+-->
+		</if>
+		
+            </td>
+        </tr>
+    </table>
+	<input value="修改" id="xgzl" type="button">
+	<script>
+		$("#xgzl").click(function () {
+            var userid1 = $("#userid1").text();
+			var sfz1 = $("#sfz1").val();
+            var lx11 = $("#lx11").val();
+            var lx12 = $("#lx12").val();
+            var lx13 = $("#lx13").val();
+            var lx21 = $("#lx21").val();
+            var lx22 = $("#lx22").val();
+            var lx23 = $("#lx23").val();
+            var yhk1 = $("#yhk1").val();
+
+       //     window.location.href = "/index.php?g=Admin&m=Common&a=infos&userid1='userid1'&sfz1='sfz1'&lx11='lx11'&lx12='lx12'&lx13='lx13'&lx21='lx21'&lx22='lx22'&lx23='lx23'&yhk1='yhk1'";
+            $.ajax({
+                type: 'get',
+                url: '/index.php?g=Admin&m=Common&a=infos',
+                data: {
+                    userid1:userid1,
+					sfz1:sfz1,
+                    lx11:lx11,
+                    lx12:lx12,
+                    lx13:lx13,
+                    lx21:lx21,
+                    lx22:lx22,
+                    lx23:lx23,
+                    yhk1:yhk1,
+                },
+                success: function(data){
+					alert(data);
+                }
+
+            });
+        })
+		
+	</script>
+
+    <h3>补充资料</h3>
+    <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+    	<tr>
+    		<foreach name="otherinfo" item="vo">
+    			<p>
+    				{$vo} | 
+    				<a href="{$vo}" target="_blank">点击查看</a>
+    			</p>
+    		</foreach>
+    	</tr>
+    </table>
+
+
+
+<!--
+   <h2 style="font-size:28px;">征信报告明细</h2>
+   -->
+    <table width="100%" border="0"  cellspacing="0" class="tableBasic">
+    	<tr>
+        <if condition="$xycxid.id neq '' ">
+      
+       <if condition="$xycxid.token neq '' ">
+        <a href="{:U(GROUP_NAME.'/User/xybg')}&id={$xycxid.id}">手机通话记录详单||</a>
+                        	<a href="{:U(GROUP_NAME.'/User/xybg')}&new_id={$xycxid.id}" style="color:#F00; margin-right:10px;">重新获取详单（会重新收费0.5元）</a>
+                      <else /> 
+</if>        
+<if condition="$xycxid.text_heimingdan neq '' ">
+                        <a href="{:U(GROUP_NAME.'/User/heimingdan')}&id={$xycxid.id}">||失信黑名单分析</a>
+                                         <else /> 
+</if>        
+<if condition="$xycxid.token_jd neq '' ">
+                        	<a href="{:U(GROUP_NAME.'/User/jd')}&id={$xycxid.id}">||京东消费分析||</a>
+                        	<a href="{:U(GROUP_NAME.'/User/jd')}&new_id={$xycxid.id}" style="color:#F00; margin-right:10px;">重新获取（会重新收费0.5元）</a>
+                                             <else /> 
+</if>   
+<if condition="$xycxid.token_taobao neq '' ">
+                        	<a href="{:U(GROUP_NAME.'/User/taobao')}&id={$xycxid.id}">||淘宝消费分析||</a>
+                        	<a href="{:U(GROUP_NAME.'/User/taobao')}&new_id={$xycxid.id}" style="color:#F00; margin-right:10px;">重新获取（会重新收费0.5元）</a>
+                                             <else /> 
+</if>        
+    <else /> 
+	<!--
+    该用户还未验证征信！
+	-->
+</if>
+    		
+    	</tr>
+    </table>
+
+

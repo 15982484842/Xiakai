@@ -1,0 +1,154 @@
+<h3>
+    {$title}
+</h3>
+<div class="filter">
+    <form action="{:U(GROUP_NAME.'/Daikuan/index_yuqi')}" method="post">
+        <input name="keyword" type="text" class="inpMain" placeholder="用户名" value="{$keyword}" size="20" />
+         <input name="sday" id="sday" type="text" placeholder="开始时间" class="inpMain  day1" value="{$sday}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" size="16" />
+
+        <input name="eday" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="eday" type="text" placeholder="结束时间" class="inpMain  day1" value="{$eday}" size="16" />
+        <input name="submit" class="btnGray" type="submit" value="筛选" />
+    </form>
+    <div style="font-size:16px;color:#000;border:1px dashed #d9d9d9; background-color:#fff">订单总计：{$sumcont}笔&nbsp;/&nbsp;借款金额总计：{$jie_money}元/&nbsp;逾期金额总计：{$yumoney}元/&nbsp;&nbsp;应还金额总计：{$sumamount}元</div>
+</div>
+<div id="list">
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="50" align="center">ID</th>
+                <th width="100" align="center">订单号</th>
+                <th width="70" align="center">用户名</th>
+               <th width="80" align="center">姓名</th>
+                <th width="50">借款金额</th>
+                <th width="50">借款期限</th>
+                <th width="50">应还金额</th>
+                <th width="100" align="center">创建日期</th>
+                <th width="100">最后还款日</th>
+                <th width="50" align="center">逾期天数</th>
+                <th width="50" align="center">逾期金额</th>
+                <th align="center">操作</th>
+            </tr>
+            <foreach name="data" item="vo">                <tr>
+                    <td align="center">{$vo.id}</td>
+                    <td align="center">{$vo.ordernum}</td>
+                    <td align="center">{$vo.user}</td>
+                 <td align="center">{$vo.name}</td>
+                    <td align="center">{$vo.jie_money}元</td>
+					<td align="center">{$vo.months}天</td>
+                    <td align="center">{$vo.money}元</td>
+                    <td align="center">{$vo.addtime|date='Y-m-d H:i:s',###}</td>
+                    <td align="center">
+						{$vo.days}
+                    </td>
+                    <td align="center">
+						{$vo.yuqidays}天
+                    </td>
+                     <td align="center">
+						¥{$vo.yuqimoney}
+                    </td>
+                    <td align="center">
+             
+                    	<a href="javascript:showbank('{$vo.bank}','{$vo.banknum}');">查看打款信息</a> |
+                        <a href="javascript:del('{$vo.ordernum}','{:U(GROUP_NAME.'/Daikuan/del',array('id'=>$vo['id']))}');">删除订单</a> |
+                        <a href="{:U(GROUP_NAME.'/Daikuan/hetong',array('id'=>$vo['id']))}">查看合同</a>                           | <a href="{:U(GROUP_NAME.'/User/userinfo',array('user' => $vo['user']))}">查看资料</a> |  <a style="color:#0039ba" href="{:U(GROUP_NAME.'/Daikuan/yuqiduanxin',array('id'=>$vo['ordernum']))}">发送还款短信</a> 
+                    </td>
+                </tr>
+           	</foreach>
+        </table>
+</div>
+<div class="clear"></div>
+<div class="pager">
+    {$page}
+</div>
+</div>
+<script>
+    function del(num,jumpurl){
+        layer.confirm(
+                '确定要删除借款订单:'+num+'吗?',
+                function (){
+                    window.location.href = jumpurl;
+                }
+        );
+    }
+    function showbank(bankname,banknum){
+  		layer.alert(
+  			'打款银行:' + bankname + "<br>" + '银行卡号:' + banknum,
+  			{
+	    		skin: 'layui-layer-lan',
+	    		closeBtn: 0,
+	    		anim: 4
+  			}
+  		);
+    }
+    function changestatus(ordernum,oid){
+    	$("#changestatus_span").html(ordernum);
+    	$("#orderid").val(oid);
+		layer.open({
+		  	type: 1,
+		  	skin: 'layui-layer-rim', //加上边框
+		  	area: ['420px', '165px'], //宽高
+		  	content: $("#changestatus_div").html()
+		});
+    }
+    function savestatus(){
+    	var id = $("#orderid").val();
+    	var status = $('input:radio[name="status"]:checked').val();
+    	if(status != 'undefined' && status != '' && status != null){
+    		$.post(
+    			"{:U(GROUP_NAME.'/Daikuan/changestatus')}",
+    			{id:id,status:status},
+    			function(data,state){
+    				if(state != "success"){
+    					layer.msg("请求数据失败!");
+    				}else if(data.status == 1){
+    					layer.msg("保存成功!");
+    					setTimeout(function(){
+    						window.location.href = window.location.href;
+    					},2000);
+    				}else{
+    					layer.msg(data.msg);
+    				}
+    			}
+    		);
+    	}else{
+    		layer.msg("请选择订单状态!");
+    	}
+    }
+</script>
+<div style="display: none;" id="changestatus_div">
+    <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+        <tr>
+            <td width="100" align="right">订单号</td>
+            <td>
+                <span id="changestatus_span"></span>
+                <input type="hidden" id="orderid" value="" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">状态</td>
+            <td>
+                <label>
+                    <input type="radio" name="status" value="0"  >
+					提交成功
+                </label>
+                <label>
+                    <input type="radio" name="status" value="1"  >
+					正在审核
+                </label>
+                <label>
+                    <input type="radio" name="status" value="2"  >
+					打款成功
+                </label>
+                <label>
+                    <input type="radio" name="status" value="-1"  >
+					审核不通过
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" onclick="savestatus();" class="btn" value="提交" />
+            </td>
+        </tr>
+    </table>
+</div>

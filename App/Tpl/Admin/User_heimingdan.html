@@ -1,0 +1,49 @@
+
+<div id="list">
+        
+        
+         
+            
+            
+             <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th colspan="11" align="left">失信黑名单分析</th>
+            </tr>
+            <tr style="color:#03C">
+            	<td>生效法律文书确定的义务</td>
+            	<td>失信被执行人行为具体情形</td>
+            	<td>案号</td>
+            	<td>性别</td>
+                	<td>发布时间</td>
+            	<td>执行法院</td>
+            	<td>姓名</td>
+                	<td>省份</td>
+            	<td>年龄</td>
+            	<td>被执行人的履行情况</td>
+          <td>身份证号</td>
+            </tr>
+            <volist name="heimingdan.data" id="vo">
+                <tr>
+                    <td>{$vo.duty}</td>
+                    <td>{$vo.disrupt_type}</td>
+                    <td>{$vo.code}</td>
+                    <td>{$vo.sex}</td>
+                 
+                   <td>{$vo.pub_time}</td>
+                    <td>{$vo.court}</td>
+                    <td>{$vo.name}</td>
+                    <td>{$vo.area}</td>
+                      <td>{$vo.age}</td>
+                    <td>{$vo.performance}</td>
+                    <td>{$vo.idcardno}</td>
+                   
+                </tr>
+            </volist>
+            </table>
+            
+         
+           
+        
+
+
+</div>

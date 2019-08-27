@@ -1,0 +1,255 @@
+<h3>
+    {$title}
+</h3>
+<if condition="!$show">
+<div class="filter">
+    <form action="{:U(GROUP_NAME.'/User/xybg')}" method="post">
+        <input name="keyword" type="text" class="inpMain" placeholder="用户名" size="20" />
+        <input name="submit" class="btnGray" type="submit" value="筛选" />
+    </form>
+</div>
+</if>
+<div id="list">
+        
+        	<if condition="!$show">
+        	<table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="center">ID</th>
+                <th width="150" align="left">用户名</th>
+                <th width="150" align="left">手机号</th>
+                <th width="120">查询时间</th>
+                <th align="center">操作</th>
+            </tr>
+            <volist name="list" id="vo">
+                <tr>
+                    <td align="center">{$vo.id}</td>
+                    <td>{$vo.user}</td>
+                    <td>{$vo.mobile}</td>
+                    <td align="center">{$vo.date}</td>
+                    <td align="center">
+                    
+                    <if condition="$vo['token'] neq ''">
+        <a href="{:U(GROUP_NAME.'/User/xybg')}&id={$vo.id}">手机通话记录详单||</a>
+                        	<!--<a href="{:U(GROUP_NAME.'/User/xybg')}&new_id={$vo.id}" style="color:#F00; margin-right:10px;">重新获取详单（会重新收费0.5元）</a>-->
+                      <else /> 
+</if>        
+<if condition="$vo['text_heimingdan'] neq ''">
+                        <a href="{:U(GROUP_NAME.'/User/heimingdan')}&id={$vo.id}">||失信黑名单分析</a>
+                                         <else /> 
+</if>  
+<if condition="$vo['token_jd'] neq ''">
+                        	<a href="{:U(GROUP_NAME.'/User/jd')}&id={$vo.id}">||京东消费分析||</a>
+                        	<!--<a href="{:U(GROUP_NAME.'/User/jd')}&new_id={$vo.id}" style="color:#F00; margin-right:10px;">重新获取（会重新收费0.5元）</a>-->
+                                             <else /> 
+                             
+</if>         
+<if condition="$vo['token_taobao'] neq ''">
+                        	<a href="{:U(GROUP_NAME.'/User/taobao')}&id={$vo.id}">||淘宝消费分析||</a>
+                        	<!--<a href="{:U(GROUP_NAME.'/User/taobao')}&new_id={$vo.id}" style="color:#F00; margin-right:10px;">重新获取（会重新收费0.5元）</a>-->
+                                             <else /> 
+                 
+</if>  
+<if condition="$vo['token_xuexin'] neq ''">
+                        	<a href="{:U(GROUP_NAME.'/User/xuexin')}&id={$vo.id}">||学信分析||</a>
+                        	<!--<a href="{:U(GROUP_NAME.'/User/xuexin')}&new_id={$vo.id}" style="color:#F00; margin-right:10px;">重新获取（会重新收费0.5元）</a>-->
+                                             <else /> 
+                             
+</if>       
+                    </td>
+                </tr>
+            </volist>
+           </table>
+            </if>
+         
+            <if condition="$show">
+            <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="left" colspan="2" >基本信息</th>
+            </tr>
+           
+                <tr>
+                    <td>姓名</td>
+                    <td>{$show.basicInfo.name}</td>
+                </tr>
+                <tr>
+                    <td>报告时间</td>
+                    <td>{$show.basicInfo.reportTime}</td>
+                </tr>
+                <tr>
+                    <td>报告编号</td>
+                    <td>{$show.basicInfo.reportID}</td>
+                </tr>
+                <tr>
+                    <td>身份证号码</td>
+                    <td>{$show.basicInfo.certNo}</td>
+                </tr>
+                <tr>
+                    <td>登记手机号</td>
+                    <td>{$show.basicInfo.phoneNo}</td>
+                </tr>
+                <tr>
+                    <td>性别</td>
+                    <td>{$show.basicInfo.sex}</td>
+                </tr>
+                <tr>
+                    <td>出生地</td>
+                    <td>{$show.basicInfo.birthArea}</td>
+                </tr>
+                <tr>
+                    <td>出生日期</td>
+                    <td>{$show.basicInfo.birthday}</td>
+                </tr>
+                <tr>
+                    <td>年龄</td>
+                    <td>{$show.basicInfo.age}</td>
+                </tr>
+                  <tr>
+                    <td>手机归属地</td>
+                    <td>{$show.basicInfo.phoneBelongArea}</td>
+                </tr>
+            </table>
+            
+            
+              <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="left" colspan="2" >运营商基本信息</th>
+            </tr>
+           
+                <tr>
+                    <td>运营商类型</td>
+                    <td>{$show.phoneInfo.operator}</td>
+                </tr>
+                <tr>
+                    <td>入网时间</td>
+                    <td>{$show.phoneInfo.inNetDate}</td>
+                </tr>
+                <tr>
+                    <td>实名认证</td>
+                    <td>{$show.phoneInfo.realName}</td>
+                </tr>
+                <tr>
+                    <td>认证身份证号</td>
+                    <td>{$show.phoneInfo.certNo}</td>
+                </tr>
+                <tr>
+                    <td>手机号</td>
+                    <td>{$show.phoneInfo.phoneNo}</td>
+                </tr>
+                <tr>
+                    <td>网龄</td>
+                    <td>{$show.phoneInfo.netAge}</td>
+                </tr>
+                <tr>
+                    <td>登记邮箱</td>
+                    <td>{$show.phoneInfo.email}</td>
+                </tr>
+                <tr>
+                    <td>当前余额</td>
+                    <td>{$show.phoneInfo.balance}</td>
+                </tr>
+                <tr>
+                    <td>会员等级</td>
+                    <td>{$show.phoneInfo.vipLevel}</td>
+                </tr>
+                <tr>
+                    <td>积分值</td>
+                    <td>{$show.phoneInfo.pointValue}</td>
+                </tr>
+                  <tr>
+                    <td>最早一次通话时间</td>
+                    <td>{$show.phoneInfo.firstCallDate}</td>
+                </tr>
+                   <tr>
+                    <td>最近一次通话时间</td>
+                    <td>{$show.phoneInfo.lastCallDate}</td>
+                </tr>
+                   <tr>
+                    <td>登记地址</td>
+                    <td>{$show.phoneInfo.addr}</td>
+                </tr>
+                 
+            </table>
+            
+            
+              <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th colspan="5" align="left">运营商消费分析</th>
+            </tr>
+            <tr>
+            	<td>月份</td>
+            	<td>主叫时间（分）</td>
+            	<td>被叫时间（分）</td>
+            	<td>短信数（条）</td>
+            	<td>话费充值额（元）</td>
+            </tr>
+            <volist name="show.consumeInfo" id="vo">
+                <tr>
+                    <td>{$vo.month}</td>
+                    <td>{$vo.callTime}</td>
+                    <td>{$vo.calledTime}</td>
+                    <td>{$vo.totalSmsNumber}</td>
+                    <td>{$vo.payMoney}</td>
+                </tr>
+            </volist>
+            </table>
+            
+            
+              <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th colspan="7" align="left">通话记录分析</th>
+            </tr>
+            <tr>
+            	<td>号码</td>
+            	<td>通话时长</td>
+            	<td>通话次数</td>
+            	<td>号码归属地</td>
+            	<td>被叫次数</td>
+                <td>主叫次数</td>
+                <td>号码标识</td>
+            </tr>
+            <volist name="show.callRecordsInfo" id="vo">
+                <tr>
+                    <td>{$vo.phoneNo}</td>
+                    <td>{$vo.connTime}</td>
+                    <td>{$vo.connTimes}</td>
+                    <td>{$vo.belongArea}</td>
+                    <td>{$vo.calledTimes}</td>
+                    <td>{$vo.callTimes}</td>
+                    <td>{$vo.identifyInfo}</td>
+                </tr>
+            </volist>
+            </table>
+            
+            
+            
+             <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th colspan="4" align="left">短信记录</th>
+            </tr>
+            <tr>
+            	<td>号码</td>
+            	<td>号码归属地</td>
+            	<td>条数</td>
+            	<td>号码标识</td>
+          
+            </tr>
+            <volist name="show.messageRecordsInfo" id="vo">
+                <tr>
+                    <td>{$vo.phoneNo}</td>
+                    <td>{$vo.belongArea}</td>
+                    <td>{$vo.totalSmsNumber}</td>
+                    <td>{$vo.identifyInfo}</td>
+                 
+                </tr>
+            </volist>
+            </table>
+            
+         
+            </if>
+        
+</div>
+<div class="clear"></div>
+<div class="pager">
+    {$page}
+</div>
+</div>

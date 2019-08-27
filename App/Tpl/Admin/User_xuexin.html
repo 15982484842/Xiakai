@@ -1,0 +1,181 @@
+
+<div id="list">
+        
+       <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="left" colspan="2" >账户信息	</th>
+            </tr>
+           
+             
+                <tr>
+                    <td>报告创建时间</td>
+                    <td>{$show.createTime}</td>
+                </tr>
+                <tr>
+           
+              
+            </table>
+            
+            
+              
+            
+              <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="left" colspan="2" >学历信息</th>
+            </tr>
+            <volist name="show.educationalBackground" id="vo">
+            <tr>
+                    <td>学籍照片</td>
+                    <td><img src="data:image/jpg;base64,{$vo.photo}" /></td>
+                </tr>
+                <tr>
+                    <td>姓名</td>
+                    <td>{$vo.name}</td>
+                </tr>
+               
+                <tr>
+                    <td>性别</td>
+                     <td>{$vo.sex}</td>
+                </tr>
+                <tr>
+                    <td>状态</td>
+                     <td>{$vo.state}</td>
+                </tr>
+               
+                <tr>
+                    <td>出生日期</td>
+                     <td>{$vo.birthData}</td>
+                </tr>
+                
+                <tr>
+                    <td>入学日期</td>
+                     <td>{$vo.enrollmentYear}</td>
+                </tr>
+             
+               
+             
+
+     <tr>
+                    <td>毕业日期</td>
+                    <td>{$vo.graduationYear}</td>
+                </tr>
+               
+                <tr>
+                    <td>学历类别</td>
+                   <td>{$vo.degreeCategory}</td>
+                </tr>
+                <tr>
+                    <td>层次</td>
+                     <td>{$vo.educationLevel}</td>
+                </tr>
+               
+                <tr>
+                    <td>学校名称</td>
+                    <td>{$vo.school}</td>
+                </tr>
+                
+                <tr>
+                    <td>专业</td>
+                    <td>{$vo.specialities}</td>
+                </tr>
+
+  <tr>
+                    <td>学习形式</td>
+                    <td>{$vo.learningForm}</td>
+                </tr>
+                  <tr>
+                    <td>证书编号</td>
+                     <td>{$vo.certificateNumber}</td>
+                </tr>
+                 <tr style="background:#0C9">
+                    <td></td>
+                     <td></td>
+                </tr>
+ </volist>
+            </table>
+            
+            
+            
+            
+            
+              <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="left" colspan="2" >学籍信息</th>
+            </tr>
+              <tr>
+                    <td>登录名:</td>
+                    <td>{$show.loginName}</td>
+                </tr>
+            <volist name="show.schoolRoll" id="vo">
+            <tr>
+                    <td>录取照片</td>
+                    <td><img src="data:image/jpg;base64,{$vo.admissionPhoto}" /></td>
+                </tr>
+                <tr>
+                    <td>姓名</td>
+                    <td>{$vo.name}</td>
+                </tr>
+               
+                <tr>
+                    <td>性别</td>
+                     <td>{$vo.sex}</td>
+                </tr>
+                <tr>
+                    <td>民族</td>
+                     <td>{$vo.nations}</td>
+                </tr>
+              
+            
+                
+                <tr>
+                    <td>入学日期</td>
+                     <td>{$vo.admissionDate}</td>
+                </tr>
+             
+               
+             
+
+     <tr>
+                    <td>离校日期</td>
+                    <td>{$vo.leaveDate}</td>
+                </tr>
+               
+                <tr>
+                    <td>学习形式</td>
+                   <td>{$vo.learningForm}</td>
+                </tr>
+              
+               
+                <tr>
+                    <td>院校名称</td>
+                    <td>{$vo.school}</td>
+                </tr>
+                
+                <tr>
+                    <td>专业</td>
+                    <td>{$vo.specialities}</td>
+                </tr>
+
+  <tr>
+                    <td>学习形式</td>
+                    <td>{$vo.learningForm}</td>
+                </tr>
+                  <tr>
+                    <td>学号</td>
+                     <td>{$vo.studentLD}</td>
+                </tr>
+                 <tr>
+                    <td>学籍状态</td>
+                     <td>{$vo.status}</td>
+                </tr>
+                 <tr style="background: #06F">
+                    <td></td>
+                     <td></td>
+                </tr>
+ </volist>
+            </table>
+            
+        
+
+
+</div>

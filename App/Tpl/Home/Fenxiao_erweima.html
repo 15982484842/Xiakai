@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title> <Somnus:sitecfg name="sitetitle"/> </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="description" content=" <Somnus:sitecfg name="sitedescription"/> ">
+<meta name="Keywords" content=" <Somnus:sitecfg name="sitekeywords"/> ">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/mui.min.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/feiqi-ee5401a8e6.css">
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/newpay-bb7fcb5546.css">
+</head>
+<script>
+document.addEventListener('plusready',function(){
+var webview = plus.webview.currentWebview();
+plus.key.addEventListener('backbutton', function() {
+webview.canBack(function(e) {
+        if (e.canBack) {
+                webview.back();
+        } else {
+            webview.close();//hide,quit
+        }
+    })
+});
+
+});
+</script>
+<body>
+<div style="width:100%; z-index:1; position:absolute">
+<img src="__PUBLIC__/home/imgs/fenxiao.jpg" width="100%"/>
+</div>
+<div style="width:100%; z-index:2; position:absolute; top:45%; left:5%">
+<img src="http://qr.topscan.com/api.php?bg=f3f3f3&fg=ff0000&gc=222222&el=l&w=200&m=10&text={$t}" width="35%"/>
+</div>
+</body>
+</html>

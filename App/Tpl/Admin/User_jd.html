@@ -1,0 +1,303 @@
+
+<div id="list">
+        
+       <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="left" colspan="2" >账户信息	</th>
+            </tr>
+           
+             
+                <tr>
+                    <td>报告创建时间</td>
+                    <td>{$show.createTime}</td>
+                </tr>
+                <tr>
+                    <td>京东登陆名</td>
+                    <td>{$show.jd_login_name}</td>
+                </tr>
+                
+             
+                   
+                      <volist name="show.orderAddress" id="vo">
+                            <tr>
+                       <td>订单收货地址</td>
+                    <td>{$vo}</td>
+                     </tr>
+                    </volist>
+                    
+               
+              
+            </table>
+            
+            
+              
+            
+              <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="left" colspan="2" >账户基本信息</th>
+            </tr>
+           
+                <tr>
+                    <td>昵称</td>
+                    <td>{$show.baseInfo.nickname}</td>
+                </tr>
+               
+                <tr>
+                    <td>真实姓名</td>
+                    <td>{$show.baseInfo.realName}</td>
+                </tr>
+                <tr>
+                    <td>登录名</td>
+                    <td>{$show.baseInfo.loginName}</td>
+                </tr>
+               
+                <tr>
+                    <td>性别</td>
+                    <td>{$show.baseInfo.sex}</td>
+                </tr>
+                
+                <tr>
+                    <td>邮箱</td>
+                    <td>{$show.baseInfo.email}</td>
+                </tr>
+
+  <tr>
+                    <td>银行卡信息</td>
+                    <volist name="show.bindBankCards" id="vo">
+                    <td>{$vo}</td>
+                    </volist>
+                </tr>
+
+            </table>
+            
+            
+            
+            
+            
+              <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="left" colspan="2" >账户级别</th>
+            </tr>
+           
+                <tr>
+                    <td>京东成长值</td>
+                    <td>{$show.accountLevel.growthValue}</td>
+                </tr>
+               
+                <tr>
+                    <td>账户级别</td>
+                    <td>{$show.accountLevel.userLevel}</td>
+                </tr>
+
+            </table>
+            
+            
+                <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="left" colspan="2" >小白信用</th>
+            </tr>
+           
+                <tr>
+                    <td>小白信用分</td>
+                    <td>{$show.xiaobaixinyong.score}</td>
+                </tr>
+               
+                <tr>
+                    <td>查询是否成功</td>
+                    <td>{$show.xiaobaixinyong.success}</td>
+                </tr>
+ <tr>
+                    <td>是否开启</td>
+                    <td>{$show.xiaobaixinyong.Code}</td>
+                </tr>
+            </table>
+            
+            
+            
+            
+            
+                 
+            
+             
+              <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="left" colspan="2" >京东白条</th>
+            </tr>
+           
+                <tr>
+                    <td>白条额度</td>
+                    <td>{$show.baitiaoInfo.avaliableAmount}</td>
+                </tr>
+               
+                <tr>
+                    <td>白条类型</td>
+                    <td>{$show.baitiaoInfo.btType}</td>
+                </tr>
+
+  <tr>
+                    <td>消费额度</td>
+                    <td>{$show.baitiaoInfo.consumeAmount}</td>
+                </tr>
+               
+                <tr>
+                    <td>每月还款金额</td>
+                    <td>{$show.baitiaoInfo.monthPending}</td>
+                </tr>
+                  <tr>
+                    <td>是否开通</td>
+                    <td>{$show.baitiaoInfo.isOpen}</td>
+                </tr>
+               
+                <tr>
+                    <td>已还款金额</td>
+                    <td>{$show.baitiaoInfo.pending}</td>
+                </tr>
+                  <tr>
+                    <td>总额</td>
+                    <td>{$show.baitiaoInfo.totalAmount}</td>
+                </tr>
+               
+                <tr>
+                    <td></td>
+                    <td>{$show.baitiaoInfo.unUsedNumber}</td>
+                </tr>
+            </table>
+            
+            
+            
+                  <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="left" colspan="2" >登录历史</th>
+            </tr>
+           
+                <tr>
+                    <td>京东登录名字</td>
+                    <td>{$show.jd_login_name}</td>
+                </tr>
+                <tr>
+                    <td>获取报告时间</td>
+                    <td>{$show.createTime}</td>
+                </tr>
+                
+                <volist name="show.loginHistory" id="vo">
+                            <tr>
+                       <td>登录地址</td>
+                    <td>{$vo}</td>
+                     </tr>
+                    </volist>
+
+            </table>
+            
+            
+               <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="left" colspan="2" >消费历史</th>
+            </tr>
+           <volist name="show.preAYearOrder" id="vo">
+                <tr>
+                    <td>金额</td>
+                    <td>{$vo.amount}</td>
+                </tr>
+                   <volist name="vo['bindProNames']" id="sub">
+                <tr>
+                    <td>商品名称</td>
+                   <td>{$sub.name}</td>
+                </tr>
+                  <tr>
+                    <td>商品类型</td>
+                   <td>{$sub.type}</td>
+                </tr>
+                    </volist>
+                    
+                     <tr>
+                    <td>时间</td>
+                   <td>{$vo.businessTime}</td>
+                </tr>
+                  <tr>
+                    <td>收件人</td>
+                   <td>{$vo.customerName}</td>
+                </tr>
+                    
+                     <tr>
+                    <td>收货地址</td>
+                   <td>{$vo.orderAddr}</td>
+                </tr>
+                  <tr>
+                    <td>收件人号码</td>
+                   <td>{$vo.orderPhone}</td>
+                </tr>
+                <tr>
+                    <td>订单状态</td>
+                   <td>{$vo.orderStatus}</td>
+                </tr>
+                <tr>
+                    <td>支付方式</td>
+                   <td>{$vo.payType}</td>
+                </tr>
+                    
+                <tr style="height:10px; background: #393">
+                    <td>分界线</td>
+                    <td></td>
+                </tr>
+     </volist>
+            </table>
+          
+            
+            
+           
+        <div style="height:40px;"></div>
+             
+              <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+                <th width="80" align="left" colspan="2" >订单列表</th>
+            </tr>
+            <volist name="show.recentAYearOrder" id="vo">
+                <tr>
+                    <td>金额</td>
+                    <td>{$vo.amount}</td>
+                </tr>
+                <tr>
+                    <td>收货地址</td>
+                    <td>{$vo.orderAddr}</td>
+                </tr>
+                  
+                <tr>
+                    <td>联系电话</td>
+                    <td>{$vo.orderPhone}</td>
+                </tr>
+                  <tr>
+                    <td>收件人</td>
+                     <td>{$vo.customerName}</td>
+                </tr>
+                 <volist name="vo['bindProNames']" id="sub">
+                <tr>
+                    <td>商品名称</td>
+                   <td>{$sub.name}</td>
+                </tr>
+                  <tr>
+                    <td>商品类型</td>
+                   <td>{$sub.type}</td>
+                </tr>
+                    </volist>
+              
+                <tr>
+                    <td>时间</td>
+                   <td>{$vo.businessTime}</td>
+                </tr>
+                <tr>
+                    <td>订单状态</td>
+                    <td>{$vo.orderStatus}</td>
+                </tr>
+                
+                 <tr style="height:10px; background:#06F">
+                    <td>分界线</td>
+                    <td></td>
+                </tr>
+                    </volist>
+                 
+            </table>
+           
+        
+
+
+</div>
